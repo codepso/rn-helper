@@ -1,0 +1,28 @@
+{
+  "name": "rn-helper",
+  "version": "1.0.0",
+  "description": "Components, Helpers for React Native Projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codepso/rn-helper.git"
+  },
+  "keywords": [
+    "helpers",
+    "components",
+    "react-native"
+  ],
+  "author": "Juan Minaya Leon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codepso/rn-helper/issues"
+  },
+  "homepage": "https://github.com/codepso/rn-helper#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "metro-react-native-babel-preset": "^0.59.0"
+  }
+}
