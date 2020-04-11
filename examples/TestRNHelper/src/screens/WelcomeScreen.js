@@ -1,6 +1,6 @@
 import React, {createRef} from 'react';
 import {Text, View, Button} from 'react-native';
-import {AlertUI, BlockUI} from '@codepso/rn-helper';
+import {AlertUI, BlockUI, MainHelper} from '@codepso/rn-helper';
 
 const alertUI = createRef();
 const blockUI = createRef();
@@ -16,6 +16,7 @@ const WelcomeScreen = () => {
 
     try {
       await sleep(500);
+      throw {message: 'Can not update user info'};
       blockUI.current.open(false);
       alertUI.current.open(
         'TestForm',
@@ -24,7 +25,7 @@ const WelcomeScreen = () => {
       );
     } catch (error) {
       blockUI.current.open(false);
-      let message = AppHelper.getErrorMessage(error);
+      let message = MainHelper.getErrorMessage(error);
       alertUI.current.open('Snap!', message);
     }
   };

@@ -723,7 +723,7 @@
 
 "@codepso/rn-helper@../../codepso-rn-helper-1.0.0.tgz":
   version "1.0.0"
-  resolved "../../codepso-rn-helper-1.0.0.tgz#81a25dc9d1ea12afad2533f3a37664abbd78f5f6"
+  resolved "../../codepso-rn-helper-1.0.0.tgz#b57bf6b7e8d0efeb1ce9bd90954ffae71546e087"
 
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"

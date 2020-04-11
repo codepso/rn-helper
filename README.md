@@ -3,7 +3,13 @@ Components, Helpers for React Native Projects.
 ## Table of content
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [User Interface (UI)](#ui)
+    - [BlockUI](#blockui)
+    - [AlertUI](#alertui)
+- [Helpers](#mainhelper)
+    - [MainHelper](#mainhelper)
 - [Use](#use)
+- [Example](#example)
 - [License](#license)
 ## Requirements
  - React Native 0.61+
@@ -19,11 +25,21 @@ yarn add lodash
 yarn add @codepso/rn-helper
 yarn upgrade @codepso/rn-helper
 ```
+## UI
+### `blockUI(state, message, bgColor, txtColor)`
+* **state**: `bool | required`
+* **message**: `string | optional` default: Loading...
+* **bgColor**: `string | optional` rgb value, default: rgba(0, 0, 0, 0.8)
+* **txtColor**: `string | optional` hex value, default: white
+### `AlertUI(title, message, goTo)`
+* **title**: `string | required`
+* **message**: `string | required`
+* **goTo**: `string | optional` screen name with react navigation 5
 ## Use
 ```javascript
 import React, {createRef} from 'react';
 import {Text, View, Button} from 'react-native';
-import {AlertUI, BlockUI} from 'rn-helper';
+import {AlertUI, BlockUI, MainHelper} from '@codepso/rn-helper';
 
 const alertUI = createRef();
 const blockUI = createRef();
@@ -32,10 +48,14 @@ const sleep = (m) => new Promise((r) => setTimeout(r, m));
 const WelcomeScreen = () => {
 
   const onSend = async () => {
-    blockUI.current.open(true);
+    // blockUI.current.open(true);
+    // blockUI.current.open(true, 'Searching...');
+    // blockUI.current.open(true, '', 'rgba(46, 139, 87, 0.8)');
+    blockUI.current.open(true, '', 'rgba(255, 255, 255, 0.8)', 'black');
 
     try {
       await sleep(500);
+      throw {message: 'Can not update user info'};
       blockUI.current.open(false);
       alertUI.current.open(
         'TestForm',
@@ -65,6 +85,20 @@ const WelcomeScreen = () => {
 };
 
 export default WelcomeScreen;
+```
+## Example
+```bash
+cd examples/TestRNHelper
+yarn install
+
+yarn remove @codepso/rn-helper
+yarn cache clean @codepso/rn-helper --force
+
+npm pack
+yarn add ../../codepso-rn-helper-x.x.x.tgz
+
+npx pod-install ios
+npx react-native run-ios
 ```
 ## License
 The React Native Helper is licensed under the terms of the GPL Open Source license and is available for free.
