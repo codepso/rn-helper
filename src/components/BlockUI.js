@@ -1,16 +1,23 @@
 import React, {forwardRef, useImperativeHandle, useState} from 'react';
-import {appStyle} from '../../assets/styles';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 const BlockUI = forwardRef((props, ref) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('Loading...');
+  const [bgColor, setBgColor] = useState('rgba(0, 0, 0, 0.8)');
+  const [txtColor, setTxtColor] = useState('white');
 
   useImperativeHandle(ref, () => ({
-    open: (visible, content = '') => {
+    open: (visible, content = '', bgColor = '', txtColor = '') => {
       setOpen(visible);
       if (content !== '') {
         setMessage(content);
+      }
+      if (bgColor !== '') {
+        setBgColor(bgColor);
+      }
+      if (txtColor !== '') {
+        setTxtColor(txtColor);
       }
     },
   }));
@@ -19,8 +26,8 @@ const BlockUI = forwardRef((props, ref) => {
     <Spinner
       visible={open}
       textContent={message}
-      overlayColor={'rgba(0, 0, 0, 0.8)'}
-      textStyle={{color: 'red'}}
+      overlayColor={bgColor}
+      textStyle={{color: txtColor}}
       animation={'slide'}
     />
   );
