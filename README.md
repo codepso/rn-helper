@@ -44,7 +44,7 @@ const WelcomeScreen = () => {
       );
     } catch (error) {
       blockUI.current.open(false);
-      let message = AppHelper.getErrorMessage(error);
+      let message = MainHelper.getErrorMessage(error);
       alertUI.current.open('Snap!', message);
     }
   };

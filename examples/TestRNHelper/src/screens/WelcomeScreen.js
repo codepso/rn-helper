@@ -1,6 +1,6 @@
 import React, {createRef} from 'react';
 import {Text, View, Button} from 'react-native';
-import {AlertUI, BlockUI} from 'rn-helper';
+import {AlertUI, BlockUI} from '@codepso/rn-helper';
 
 const alertUI = createRef();
 const blockUI = createRef();
@@ -9,7 +9,10 @@ const sleep = (m) => new Promise((r) => setTimeout(r, m));
 const WelcomeScreen = () => {
 
   const onSend = async () => {
-    blockUI.current.open(true);
+    // blockUI.current.open(true);
+    // blockUI.current.open(true, 'Searching...');
+    // blockUI.current.open(true, '', 'rgba(46, 139, 87, 0.8)');
+    blockUI.current.open(true, '', 'rgba(255, 255, 255, 0.8)', 'black');
 
     try {
       await sleep(500);

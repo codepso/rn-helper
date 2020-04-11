@@ -721,6 +721,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@codepso/rn-helper@../../codepso-rn-helper-1.0.0.tgz":
+  version "1.0.0"
+  resolved "../../codepso-rn-helper-1.0.0.tgz#81a25dc9d1ea12afad2533f3a37664abbd78f5f6"
+
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"
@@ -5826,10 +5830,6 @@ rimraf@~2.2.6:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
-
-rn-helper@../../rn-helper-1.0.1.tgz:
-  version "1.0.1"
-  resolved "../../rn-helper-1.0.1.tgz#1485aab4542a8225952b54109783acf270b1b7d7"
 
 rsvp@^4.8.4:
   version "4.8.5"
