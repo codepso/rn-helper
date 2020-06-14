@@ -43,6 +43,10 @@ class MainHelper {
       return camelCase(key);
     });
   }
+
+  static sendError(error) {
+    throw error;
+  }
 }
 
 export default MainHelper;
