@@ -2,24 +2,41 @@ import has from 'lodash/has';
 import {camelCase, mapKeys, mapValues, snakeCase} from 'lodash';
 
 class MainHelper {
+
   static pct(percentage, value) {
     let temp = (percentage * value) / 100;
     return Math.round(temp);
   }
 
-  static getErrorMessage(error) {
+  /**
+   * Get Errors.
+   * @param {Object} error - Error.
+   * @param {string} rule - Get specific error with Laravel Forms.
+   * @returns {string}
+   */
+  static getErrorMessage(error, rule= '') {
     const defaultMessage = 'Unknown error';
-    let message = has(error, 'response.data.message')
-      ? error.response.data.message
+
+    let message = (rule !== '' && has(error, 'response.data.errors.' + rule))
+      ? error.response.data['errors'][rule][0]
       : defaultMessage;
+
     if (message === defaultMessage) {
-      message = has(error, 'response.data.msg')
-        ? error.response.data.msg
+      message = has(error, 'response.data.message')
+        ? error.response.data.message
         : defaultMessage;
     }
+
+    if (message === defaultMessage) {
+      message = has(error, 'response.data.msg')
+        ? error.response.data['msg']
+        : defaultMessage;
+    }
+
     if (message === defaultMessage) {
       message = has(error, 'message') ? error.message : defaultMessage;
     }
+
     return message;
   }
 

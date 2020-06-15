@@ -23,7 +23,7 @@ yarn add lodash
 ## Installation
 ```bash
 yarn add @codepso/rn-helper
-yarn upgrade @codepso/rn-helper
+yarn upgrade @codepso/rn-helper@latest
 ```
 ## UI
 ### `blockUI(state, message, bgColor, txtColor)`
