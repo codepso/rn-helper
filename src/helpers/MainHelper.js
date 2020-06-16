@@ -11,21 +11,14 @@ class MainHelper {
   /**
    * Get Errors.
    * @param {Object} error - Error.
-   * @param {string} rule - Get specific error with Laravel Forms.
    * @returns {string}
    */
-  static getErrorMessage(error, rule= '') {
+  static getErrorMessage(error) {
     const defaultMessage = 'Unknown error';
 
-    let message = (rule !== '' && has(error, 'response.data.errors.' + rule))
-      ? error.response.data['errors'][rule][0]
+    let message = has(error, 'response.data.message')
+      ? error.response.data.message
       : defaultMessage;
-
-    if (message === defaultMessage) {
-      message = has(error, 'response.data.message')
-        ? error.response.data.message
-        : defaultMessage;
-    }
 
     if (message === defaultMessage) {
       message = has(error, 'response.data.msg')
@@ -37,6 +30,29 @@ class MainHelper {
       message = has(error, 'message') ? error.message : defaultMessage;
     }
 
+    return message;
+  }
+
+  /**
+   * Get Laravel Errors.
+   * @param {Object} error - Error.
+   * @param {string} rule - Get error from Laravel.
+   * @returns {string}
+   */
+  static getLaravelErrorMessage(error, rule= '') {
+    const defaultMessage = 'Unknown error';
+
+    let message = (rule !== '' && has(error, 'response.data.errors.' + rule))
+      ? error.response.data['errors'][rule][0]
+      : defaultMessage;
+
+    if (message === defaultMessage) {
+      message = has(error, 'message') ? error.message : defaultMessage;
+    }
+
+    if (message === 'Wrong number of segments') {
+        message = 'Invalid Token';
+    }
     return message;
   }
 
