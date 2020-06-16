@@ -13,7 +13,7 @@ class MainHelper {
    * @param {Object} error - Error.
    * @returns {string}
    */
-  static getErrorMessage(error) {
+  static getError(error) {
     const defaultMessage = 'Unknown error';
 
     let message = has(error, 'response.data.message')
@@ -39,7 +39,7 @@ class MainHelper {
    * @param {string} rule - Get error from Laravel.
    * @returns {string}
    */
-  static getLaravelErrorMessage(error, rule= '') {
+  static getLaravelError(error, rule= '') {
     const defaultMessage = 'Unknown error';
 
     let message = (rule !== '' && has(error, 'response.data.errors.' + rule))
@@ -47,7 +47,9 @@ class MainHelper {
       : defaultMessage;
 
     if (message === defaultMessage) {
-      message = has(error, 'message') ? error.message : defaultMessage;
+      message = has(error, 'response.data.message')
+        ? error.response.data.message
+        : defaultMessage;
     }
 
     if (message === 'Wrong number of segments') {
