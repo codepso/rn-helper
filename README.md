@@ -16,6 +16,7 @@ Components, Helpers for React Native Projects.
  - React Navigation 5+
  - React Native Loading Spinner Overlay
  - Lodash 4.15+
+ - React Native Paper 3.10+
  ```bash
 yarn add react-native-loading-spinner-overlay
 yarn add lodash
@@ -31,6 +32,62 @@ yarn upgrade @codepso/rn-helper@latest
 * **message**: `string | optional` default: Loading...
 * **bgColor**: `string | optional` rgb value, default: rgba(0, 0, 0, 0.8)
 * **txtColor**: `string | optional` hex value, default: white
+### `DialogUI(title, message, goTo)`
+React Native Paper
+* **title**: `string | required`
+* **message**: `string | required`
+* **goTo**: `string | optional` screen name with react navigation 5
+## Use
+```javascript
+import {createRef} from 'react';
+import {Text, View, Button} from 'react-native';
+import {DialogUI, BlockUI, MainHelper} from '@codepso/rn-helper';
+
+const dialogUI = createRef();
+const blockUI = createRef();
+const sleep = (m) => new Promise((r) => setTimeout(r, m));
+
+const WelcomeScreen = () => {
+
+  const onSend = async () => {
+    // blockUI.current.open(true);
+    // blockUI.current.open(true, 'Searching...');
+    // blockUI.current.open(true, '', 'rgba(46, 139, 87, 0.8)');
+    blockUI.current.open(true, '', 'rgba(255, 255, 255, 0.8)', 'black');
+
+    try {
+      await sleep(500);
+      // throw {message: 'Can not update user info'};
+      blockUI.current.open(false);
+      dialogUI.current.open(
+        'TestForm',
+        'TestForm data has been sent',
+        'About',
+      );
+    } catch (error) {
+      blockUI.current.open(false);
+      let message = MainHelper.getError(error);
+      dialogUI.current.open('Snap!', message);
+    }
+  };
+
+  return (
+    <>
+      <DialogUI ref={dialogUI} />
+      <BlockUI ref={blockUI} />
+      <View>
+        <Text>Welcome</Text>
+        <Button
+          onPress={onSend}
+          title="Test"
+        />
+      </View>
+    </>
+  );
+};
+
+export default WelcomeScreen;
+```
 ### `AlertUI(title, message, goTo)`
 * **title**: `string | required`
 * **message**: `string | required`
@@ -64,7 +121,7 @@ const WelcomeScreen = () => {
       );
     } catch (error) {
       blockUI.current.open(false);
-      let message = MainHelper.getErrorMessage(error);
+      let message = MainHelper.getError(error);
       alertUI.current.open('Snap!', message);
     }
   };
