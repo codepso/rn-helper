@@ -5,6 +5,7 @@ Components, Helpers for React Native Projects.
 - [Installation](#installation)
 - [User Interface (UI)](#ui)
     - [BlockUI](#blockui)
+    - [DialogUI](#dialogui)
     - [AlertUI](#alertui)
 - [Helpers](#mainhelper)
     - [MainHelper](#mainhelper)
