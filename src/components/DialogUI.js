@@ -1,9 +1,7 @@
 import React, {forwardRef, useImperativeHandle, useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
 import {Button, Paragraph, Dialog, Portal} from 'react-native-paper';
 
 const DialogUI = forwardRef((props, ref) => {
-  const {navigate} = useNavigation();
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
@@ -31,7 +29,8 @@ const DialogUI = forwardRef((props, ref) => {
           <Button onPress={() => {
             setOpen(false);
             if (goTo !== null) {
-              navigate(goTo);
+              const {navigation, screen} =  {...goTo};
+              navigation.navigate(screen);
             }
           }}>Ok</Button>
         </Dialog.Actions>

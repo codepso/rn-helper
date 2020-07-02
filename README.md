@@ -53,7 +53,8 @@ const dialogUI = createRef();
 const blockUI = createRef();
 const sleep = (m) => new Promise((r) => setTimeout(r, m));
 
-const WelcomeScreen = () => {
+const WelcomeScreen = (props) => {
+  const {navigation} = props;
 
   const onSend = async () => {
     // blockUI.current.open(true);
@@ -68,7 +69,7 @@ const WelcomeScreen = () => {
       dialogUI.current.open(
         'TestForm',
         'TestForm data has been sent',
-        'About',
+        {navigation, screen: 'About'}
       );
       /*alertUI.current.open(
         'TestForm',
