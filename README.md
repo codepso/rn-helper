@@ -33,11 +33,12 @@ yarn upgrade @codepso/rn-helper@latest
 * **message**: `string | optional` default: Loading...
 * **bgColor**: `string | optional` rgb value, default: rgba(0, 0, 0, 0.8)
 * **txtColor**: `string | optional` hex value, default: white
-### `DialogUI(title, message, goTo)`
+### `DialogUI(title, message, goTo, confirm)`
 React Native Paper
 * **title**: `string | required`
 * **message**: `string | required`
-* **goTo**: `string | optional` screen name with react navigation 5
+* **goTo**: `object | optional` contains screen name and navigation 5 reference
+* **confirm**: `bool | optional` cancel button
 ### `AlertUI(title, message, goTo)`
 * **title**: `string | required`
 * **message**: `string | required`
