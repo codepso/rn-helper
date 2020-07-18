@@ -5,9 +5,10 @@ const BlockUI = forwardRef((props, ref) => {
   const bgColorDefault = props.hasOwnProperty('bgColor') ? props.bgColor : 'rgba(0, 0, 0, 0.8)';
   const txtColorDefault = props.hasOwnProperty('txtColor') ? props.txtColor : 'white';
   const animationDefault = props.hasOwnProperty('animation') ? props.animation : 'none';
+  const messageDefault = props.hasOwnProperty('message') ? props.message : 'Loading...';
 
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState('Loading...');
+  const [message, setMessage] = useState(messageDefault);
   const [bgColor, setBgColor] = useState(bgColorDefault);
   const [txtColor, setTxtColor] = useState(txtColorDefault);
 
