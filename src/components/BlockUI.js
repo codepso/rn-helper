@@ -2,10 +2,14 @@ import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 const BlockUI = forwardRef((props, ref) => {
+  const bgColorDefault = props.hasOwnProperty('bgColor') ? props.bgColor : 'rgba(0, 0, 0, 0.8)';
+  const txtColorDefault = props.hasOwnProperty('txtColor') ? props.txtColor : 'white';
+  const animationDefault = props.hasOwnProperty('animation') ? props.animation : 'none';
+
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('Loading...');
-  const [bgColor, setBgColor] = useState('rgba(0, 0, 0, 0.8)');
-  const [txtColor, setTxtColor] = useState('white');
+  const [bgColor, setBgColor] = useState(bgColorDefault);
+  const [txtColor, setTxtColor] = useState(txtColorDefault);
 
   useImperativeHandle(ref, () => ({
     open: (visible, content = '', bgColor = '', txtColor = '') => {
@@ -28,7 +32,7 @@ const BlockUI = forwardRef((props, ref) => {
       textContent={message}
       overlayColor={bgColor}
       textStyle={{color: txtColor}}
-      animation={'slide'}
+      animation={animationDefault}
     />
   );
 });
