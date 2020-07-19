@@ -1,5 +1,4 @@
-import has from 'lodash/has';
-import {camelCase, mapKeys, mapValues, snakeCase} from 'lodash';
+import {camelCase, mapKeys, mapValues, snakeCase, has, isPlainObject, transform} from 'lodash';
 
 class MainHelper {
 
@@ -74,9 +73,17 @@ class MainHelper {
   }
 
   static toCamelCase(data) {
-    return mapKeys(data, function(value, key) {
-      return camelCase(key);
-    });
+    return transform(data, (result, value, key) => {
+      // Check if theres is a JSON child
+      if (isPlainObject(value)) {
+        const nKey = camelCase(key);
+        // Recursive function
+        result[nKey] = MainHelper.toCamelCase(value);
+      } else {
+        const nKey = camelCase(key);
+        result[nKey] = value;
+      }
+    }, {});
   }
 
   static sendError(error) {
