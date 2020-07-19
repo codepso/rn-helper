@@ -72,6 +72,11 @@ class MainHelper {
     });
   }
 
+  /**
+   * Convert to CamelCase.
+   * @param {Object} data - Snake Case data format.
+   * @returns {Object}
+   */
   static toCamelCase(data) {
     return transform(data, (result, value, key) => {
       // Check if theres is a JSON child
