@@ -12,6 +12,15 @@ const BlockUI = forwardRef((props, ref) => {
   const [bgColor, setBgColor] = useState(bgColorDefault);
   const [txtColor, setTxtColor] = useState(txtColorDefault);
 
+  // Verify Changes
+  if (bgColor !== bgColorDefault) {
+    setBgColor(bgColorDefault);
+  }
+
+  if (txtColor !== txtColorDefault) {
+    setTxtColor(txtColorDefault);
+  }
+
   useImperativeHandle(ref, () => ({
     open: (visible, content = '', bgColor = '', txtColor = '') => {
       setOpen(visible);
