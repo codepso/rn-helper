@@ -2,6 +2,8 @@ import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import {Button, Paragraph, Dialog, Portal} from 'react-native-paper';
 
 const DialogUI = forwardRef((props, ref) => {
+  const txtOk = props.hasOwnProperty('txtOk') ? props.txtOk : 'Ok';
+  const txtCancel = props.hasOwnProperty('txtCancel') ? props.txtCancel : 'Cancel';
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
@@ -31,7 +33,7 @@ const DialogUI = forwardRef((props, ref) => {
           {confirm &&
           <Button onPress={() => {
             setOpen(false);
-          }}>Cancel</Button>
+          }}>{txtCancel}</Button>
           }
           <Button onPress={() => {
             setOpen(false);
@@ -39,7 +41,7 @@ const DialogUI = forwardRef((props, ref) => {
               const {navigation, screen} =  {...goTo};
               navigation.navigate(screen);
             }
-          }}>Ok</Button>
+          }}>{txtOk}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
