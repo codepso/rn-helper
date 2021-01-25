@@ -9,14 +9,16 @@ const DialogUI = forwardRef((props, ref) => {
   const [message, setMessage] = useState('');
   const [goTo, setGoTo] = useState(null);
   const [confirm, setConfirm] = useState(false);
+  const [btnMode, setBtnMode] = useState('text');
 
   useImperativeHandle(ref, () => ({
-    open: (title, message, goTo = null, confirm = false) => {
+    open: (title, message, goTo = null, confirm = false, btnMode = 'text') => {
       setOpen(true);
       setTitle(title);
       setMessage(message);
       setGoTo(goTo);
       setConfirm(confirm);
+      setBtnMode(btnMode);
     }
   }));
 
@@ -31,7 +33,7 @@ const DialogUI = forwardRef((props, ref) => {
         </Dialog.Content>
         <Dialog.Actions>
           {confirm &&
-          <Button onPress={() => {
+          <Button mode={btnMode} onPress={() => {
             setOpen(false);
           }}>{txtCancel}</Button>
           }
