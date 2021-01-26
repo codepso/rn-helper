@@ -32,7 +32,7 @@ const DialogUI = forwardRef((props, ref) => {
         </Dialog.Content>
         <Dialog.Actions>
           {confirm &&
-          <Button mode={btnMode} onPress={() => {
+          <Button style={{marginRight: 10}} mode={btnMode} onPress={() => {
             setOpen(false);
           }}>{txtCancel}</Button>
           }
