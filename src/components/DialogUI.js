@@ -38,8 +38,12 @@ const DialogUI = forwardRef((props, ref) => {
           <Button onPress={() => {
             setOpen(false);
             if (goTo !== null) {
-              const {navigation, screen} =  {...goTo};
-              navigation.navigate(screen);
+              const {navigation, screen, params} =  {...goTo};
+              if (params === undefined) {
+                navigation.navigate(screen);
+              } else {
+                navigation.navigate(screen, params);
+              }
             }
           }}>{txtOk}</Button>
         </Dialog.Actions>
