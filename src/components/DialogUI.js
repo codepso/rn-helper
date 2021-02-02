@@ -4,6 +4,7 @@ import {Button, Paragraph, Dialog, Portal} from 'react-native-paper';
 const DialogUI = forwardRef((props, ref) => {
   const txtOk = props.hasOwnProperty('txtOk') ? props.txtOk : 'Ok';
   const txtCancel = props.hasOwnProperty('txtCancel') ? props.txtCancel : 'Cancel';
+  const btnMode = props.hasOwnProperty('btnMode') ? props.btnMode : 'text';
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
@@ -31,11 +32,11 @@ const DialogUI = forwardRef((props, ref) => {
         </Dialog.Content>
         <Dialog.Actions>
           {confirm &&
-          <Button onPress={() => {
+          <Button style={{marginRight: 10}} mode={btnMode} onPress={() => {
             setOpen(false);
           }}>{txtCancel}</Button>
           }
-          <Button onPress={() => {
+          <Button mode={btnMode} onPress={() => {
             setOpen(false);
             if (goTo !== null) {
               const {navigation, screen, params} =  {...goTo};
