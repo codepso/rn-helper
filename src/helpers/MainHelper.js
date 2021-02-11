@@ -1,4 +1,4 @@
-import {camelCase, mapKeys, mapValues, snakeCase, has, isPlainObject, transform} from 'lodash';
+import {camelCase, mapKeys, mapValues, snakeCase, has, isPlainObject, transform, isString} from 'lodash';
 
 class MainHelper {
 
@@ -15,9 +15,15 @@ class MainHelper {
   static getError(error) {
     const defaultMessage = 'Unknown error';
 
-    let message = has(error, 'response.data.message')
-      ? error.response.data.message
+    let message = has(error, 'response.data') && isString(error.response.data)
+      ? error.response.data
       : defaultMessage;
+
+    if (message === defaultMessage) {
+      message = has(error, 'response.data.message')
+        ? error.response.data.message
+        : defaultMessage;
+    }
 
     if (message === defaultMessage) {
       message = has(error, 'response.data.msg')
@@ -54,6 +60,7 @@ class MainHelper {
     if (message === 'Wrong number of segments') {
         message = 'Invalid Token';
     }
+
     return message;
   }
 
