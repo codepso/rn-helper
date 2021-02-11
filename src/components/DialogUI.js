@@ -42,11 +42,11 @@ const DialogUI = forwardRef((props, ref) => {
         </Dialog.Content>
         <Dialog.Actions>
           {confirm &&
-          <Button style={{marginRight: 10}} mode={btnMode} onPress={() => {
+          <Button style={{marginRight: 10}} uppercase={false} mode={btnMode} onPress={() => {
             setOpen(false);
           }}>{btnCancel}</Button>
           }
-          <Button mode={btnMode} onPress={() => {
+          <Button mode={btnMode} uppercase={false} onPress={() => {
             setOpen(false);
             if (goTo !== null) {
               const {navigation, screen, params} =  {...goTo};
