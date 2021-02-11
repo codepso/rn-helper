@@ -1,6 +1,6 @@
 {
   "name": "@codepso/rn-helper",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Components, Helpers for React Native Projects",
   "main": "index.js",
   "scripts": {

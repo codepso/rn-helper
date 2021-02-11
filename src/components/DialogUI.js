@@ -24,9 +24,13 @@ const DialogUI = forwardRef((props, ref) => {
       const {btnOk, btnCancel} =  {...buttons};
       if (btnOk !== undefined) {
         setBtnOk(btnOk);
+      } else {
+        setBtnOk(txtOk);
       }
       if (btnCancel !== undefined) {
         setBtnCancel(btnCancel);
+      } else {
+        setBtnCancel(txtCancel);
       }
     }
   }));
