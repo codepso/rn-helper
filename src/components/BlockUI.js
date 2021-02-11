@@ -41,7 +41,7 @@ const BlockUI = forwardRef((props, ref) => {
       visible={open}
       textContent={message}
       overlayColor={bgColor}
-      textStyle={{color: txtColor}}
+      textStyle={{color: txtColor, fontWeight: 'normal'}}
       animation={animationDefault}
     />
   );

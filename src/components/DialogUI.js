@@ -10,14 +10,24 @@ const DialogUI = forwardRef((props, ref) => {
   const [message, setMessage] = useState('');
   const [goTo, setGoTo] = useState(null);
   const [confirm, setConfirm] = useState(false);
+  const [btnOk, setBtnOk] = useState(txtOk);
+  const [btnCancel, setBtnCancel] = useState(txtCancel);
 
   useImperativeHandle(ref, () => ({
-    open: (title, message, goTo = null, confirm = false) => {
+    open: (title, message, goTo = null, confirm = false, buttons = null) => {
       setOpen(true);
       setTitle(title);
       setMessage(message);
       setGoTo(goTo);
       setConfirm(confirm);
+
+      const {btnOk, btnCancel} =  {...buttons};
+      if (btnOk !== undefined) {
+        setBtnOk(btnOk);
+      }
+      if (btnCancel !== undefined) {
+        setBtnCancel(btnCancel);
+      }
     }
   }));
 
@@ -34,7 +44,7 @@ const DialogUI = forwardRef((props, ref) => {
           {confirm &&
           <Button style={{marginRight: 10}} mode={btnMode} onPress={() => {
             setOpen(false);
-          }}>{txtCancel}</Button>
+          }}>{btnCancel}</Button>
           }
           <Button mode={btnMode} onPress={() => {
             setOpen(false);
@@ -46,7 +56,7 @@ const DialogUI = forwardRef((props, ref) => {
                 navigation.navigate(screen, params);
               }
             }
-          }}>{txtOk}</Button>
+          }}>{btnOk}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
