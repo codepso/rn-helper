@@ -1,6 +1,6 @@
 {
   "name": "@codepso/rn-helper",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "Components, Helpers for React Native Projects",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,8 @@
   "dependencies": {},
   "devDependencies": {
     "jest": "^26.1.0",
-    "metro-react-native-babel-preset": "^0.59.0"
+    "lodash": "^4.17.21",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react-native-paper": "^4.7.2"
   }
 }
