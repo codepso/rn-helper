@@ -23,8 +23,8 @@ const Dialog2UI = forwardRef((props, ref) => {
     },
     btn: {
       mode: btnMode,
-      btnOk: txtOk,
-      btnCancel: txtCancel,
+      ok: txtOk,
+      cancel: txtCancel,
     },
     confirm: false,
     styles: {
