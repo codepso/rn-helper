@@ -44,15 +44,15 @@ const DialogUI = forwardRef((props, ref) => {
   const [settings, setSettings] = useState(template);
 
   useImperativeHandle(ref, () => ({
-    open: (title, message, structure = null) => {
+    open: (title, message, settings = null) => {
       setOpen(true);
       setTitle(title);
       setMessage(message);
 
       // Settings
       let defaultSettings = clone(template);
-      if (structure !== null) {
-        const clean = pick(structure, keys(template));
+      if (settings !== null) {
+        const clean = pick(settings, keys(template));
         const copy = clone(template);
         defaultSettings = merge(copy, clean);
       }
