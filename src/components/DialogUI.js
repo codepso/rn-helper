@@ -1,6 +1,6 @@
 import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import {Button, Paragraph, Dialog, Portal} from 'react-native-paper';
-import {merge, keys, pick, has} from 'lodash';
+import {merge, keys, pick, has, clone} from 'lodash';
 
 /**
  * @typedef Structure
@@ -51,7 +51,8 @@ const DialogUI = forwardRef((props, ref) => {
 
       if (structure !== null) {
         const clean = pick(structure, keys(template));
-        const result = merge(template, clean);
+        const copy = clone(template);
+        const result = merge(copy, clean);
         setStructure(result);
       }
     }
