@@ -11,9 +11,17 @@ import {merge, keys, pick, has} from 'lodash';
  */
 
 const DialogUI = forwardRef((props, ref) => {
+
+  const defaultStyles = {
+    title: {},
+    btnOk: {},
+    btnCancel: {marginRight: 10},
+  };
+
   const txtOk = has(props, 'txtOk') ? props['txtOk'] : 'Ok';
   const txtCancel = has(props, 'txtCancel') ? props['txtCancel'] : 'Cancel';
   const btnMode = has(props, 'btnMode') ? props['btnMode'] : 'text';
+  const styles = has(props, 'styles') ? props['styles'] : defaultStyles;
 
   const template = {
     nav: {
@@ -27,11 +35,7 @@ const DialogUI = forwardRef((props, ref) => {
       cancel: txtCancel,
     },
     confirm: false,
-    styles: {
-      title: {},
-      btnOk: {},
-      btnCancel: {marginRight: 10},
-    },
+    styles,
   };
 
   const [open, setOpen] = useState(false);
