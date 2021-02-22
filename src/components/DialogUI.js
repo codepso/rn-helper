@@ -41,7 +41,7 @@ const DialogUI = forwardRef((props, ref) => {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
-  const [structure, setStructure] = useState(template);
+  const [settings, setSettings] = useState(template);
 
   useImperativeHandle(ref, () => ({
     open: (title, message, structure = null) => {
@@ -49,12 +49,14 @@ const DialogUI = forwardRef((props, ref) => {
       setTitle(title);
       setMessage(message);
 
+      // Settings
+      let defaultSettings = clone(template);
       if (structure !== null) {
         const clean = pick(structure, keys(template));
         const copy = clone(template);
-        const result = merge(copy, clean);
-        setStructure(result);
+        defaultSettings = merge(copy, clean);
       }
+      setSettings(defaultSettings);
     }
   }));
 
@@ -63,26 +65,26 @@ const DialogUI = forwardRef((props, ref) => {
       <Dialog
         visible={open}
         onDismiss={false}>
-        <Dialog.Title style={structure.styles.title}>{title}</Dialog.Title>
+        <Dialog.Title style={settings.styles.title}>{title}</Dialog.Title>
         <Dialog.Content>
           <Paragraph>{message}</Paragraph>
         </Dialog.Content>
         <Dialog.Actions>
-          {structure.confirm &&
-          <Button style={structure.styles.btnCancel} uppercase={false} mode={structure.btn.mode} onPress={() => {
+          {settings.confirm &&
+          <Button style={settings.styles.btnCancel} uppercase={false} mode={settings.btn.mode} onPress={() => {
             setOpen(false);
-          }}>{structure.btn.cancel}</Button>
+          }}>{settings.btn.cancel}</Button>
           }
-          <Button style={structure.styles.btnCancel} uppercase={false} mode={structure.btn.mode} onPress={() => {
+          <Button style={settings.styles.btnCancel} uppercase={false} mode={settings.btn.mode} onPress={() => {
             setOpen(false);
-            if (structure.nav.route !== null) {
-              if (structure.nav.params === null) {
-                structure.nav.route.navigate(structure.nav.screen);
+            if (settings.nav.route !== null) {
+              if (settings.nav.params === null) {
+                settings.nav.route.navigate(settings.nav.screen);
               } else {
-                structure.nav.route.navigate(structure.nav.screen, structure.nav.params);
+                settings.nav.route.navigate(settings.nav.screen, settings.nav.params);
               }
             }
-          }}>{structure.btn.ok}</Button>
+          }}>{settings.btn.ok}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
