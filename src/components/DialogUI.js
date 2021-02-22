@@ -1,36 +1,54 @@
 import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import {Button, Paragraph, Dialog, Portal} from 'react-native-paper';
+import {merge, keys, pick, has} from 'lodash';
+
+/**
+ * @typedef Structure
+ * @type {object}
+ * @property {object} nav
+ * @property {object} nav.route
+ * @property {function} nav.route.navigate
+ */
 
 const DialogUI = forwardRef((props, ref) => {
-  const txtOk = props.hasOwnProperty('txtOk') ? props.txtOk : 'Ok';
-  const txtCancel = props.hasOwnProperty('txtCancel') ? props.txtCancel : 'Cancel';
-  const btnMode = props.hasOwnProperty('btnMode') ? props.btnMode : 'text';
+  const txtOk = has(props, 'txtOk') ? props['txtOk'] : 'Ok';
+  const txtCancel = has(props, 'txtCancel') ? props['txtCancel'] : 'Cancel';
+  const btnMode = has(props, 'btnMode') ? props['btnMode'] : 'text';
+
+  const template = {
+    nav: {
+      route: null,
+      screen: '',
+      params: null
+    },
+    btn: {
+      mode: btnMode,
+      ok: txtOk,
+      cancel: txtCancel,
+    },
+    confirm: false,
+    styles: {
+      title: {},
+      btnOk: {},
+      btnCancel: {marginRight: 10},
+    },
+  };
+
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
-  const [goTo, setGoTo] = useState(null);
-  const [confirm, setConfirm] = useState(false);
-  const [btnOk, setBtnOk] = useState(txtOk);
-  const [btnCancel, setBtnCancel] = useState(txtCancel);
+  const [structure, setStructure] = useState(template);
 
   useImperativeHandle(ref, () => ({
-    open: (title, message, goTo = null, confirm = false, buttons = null) => {
+    open: (title, message, structure = null) => {
       setOpen(true);
       setTitle(title);
       setMessage(message);
-      setGoTo(goTo);
-      setConfirm(confirm);
 
-      const {btnOk, btnCancel} =  {...buttons};
-      if (btnOk !== undefined) {
-        setBtnOk(btnOk);
-      } else {
-        setBtnOk(txtOk);
-      }
-      if (btnCancel !== undefined) {
-        setBtnCancel(btnCancel);
-      } else {
-        setBtnCancel(txtCancel);
+      if (structure !== null) {
+        const clean = pick(structure, keys(template));
+        const result = merge(template, clean);
+        setStructure(result);
       }
     }
   }));
@@ -40,27 +58,26 @@ const DialogUI = forwardRef((props, ref) => {
       <Dialog
         visible={open}
         onDismiss={false}>
-        <Dialog.Title>{title}</Dialog.Title>
+        <Dialog.Title style={structure.styles.title}>{title}</Dialog.Title>
         <Dialog.Content>
           <Paragraph>{message}</Paragraph>
         </Dialog.Content>
         <Dialog.Actions>
-          {confirm &&
-          <Button style={{marginRight: 10}} uppercase={false} mode={btnMode} onPress={() => {
+          {structure.confirm &&
+          <Button style={structure.styles.btnCancel} uppercase={false} mode={structure.btn.mode} onPress={() => {
             setOpen(false);
-          }}>{btnCancel}</Button>
+          }}>{structure.btn.cancel}</Button>
           }
-          <Button mode={btnMode} uppercase={false} onPress={() => {
+          <Button style={structure.styles.btnCancel} uppercase={false} mode={structure.btn.mode} onPress={() => {
             setOpen(false);
-            if (goTo !== null) {
-              const {navigation, screen, params} =  {...goTo};
-              if (params === undefined) {
-                navigation.navigate(screen);
+            if (structure.nav.route !== null) {
+              if (structure.nav.params === null) {
+                structure.nav.route.navigate(structure.nav.screen);
               } else {
-                navigation.navigate(screen, params);
+                structure.nav.route.navigate(structure.nav.screen, structure.nav.params);
               }
             }
-          }}>{btnOk}</Button>
+          }}>{structure.btn.ok}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
